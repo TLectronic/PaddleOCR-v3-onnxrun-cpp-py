@@ -17,16 +17,20 @@ using namespace Ort;
 
 int main()
 {
+	// 初始化检测相关的三个模型
 	TextDetector detect_model;
 	TextClassifier angle_model;
 	TextRecognizer rec_model;
 
+	// 读取图像
 	string imgpath = "images/1.jpg";
 	Mat srcimg = imread(imgpath);
 	///cv::rotate(srcimg, srcimg, 1);
 
+	// 用 detect_model 对图像进行检测
 	vector< vector<Point2f> > results = detect_model.detect(srcimg);
 
+	
 	for (size_t i = 0; i < results.size(); i++)
 	{
 		Mat textimg = detect_model.get_rotate_crop_image(srcimg, results[i]);
